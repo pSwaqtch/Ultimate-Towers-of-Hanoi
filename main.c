@@ -16,7 +16,7 @@ int main() {
 
     int firstMove = 0;
     int move=0;
-    char gameBoard[numRings][numTowers];
+    char gameBoardTemp[numRings][numTowers];
     char ring[10][50];
 
     while(!firstMove){
@@ -24,12 +24,13 @@ int main() {
     //Board Initialization
         for (int i = 0; i < numRings; i++) {
             for (int j = 0; j < numTowers; j++) {
-                gameBoard[i][j] = '.';
+                gameBoardTemp[i][j] = '.';
             }
         }
         for (int i = numTowers-1, j = 0; i >= 0 && j < numTowers; i--, j++) {
-            gameBoard[0][i] = j + '1';
+            gameBoardTemp[0][i] = j + '1';
         }
+
         //rings
         char ringi[10] = {'1', '2', '3', '4', '5', '6', '7', '8', '9', '.'};
 
@@ -42,7 +43,7 @@ int main() {
         }
 
         //board(numRings, numTowers, gameBoard);
-        printUltimateBoard(playerNameLength, playerName, numRings, numTowers, move, gameBoard, ring);
+        printUltimateBoard(playerNameLength, playerName, numRings, numTowers, move, gameBoardTemp, ring);
 
 
         printf("\n\nAIM: \n");
@@ -62,9 +63,22 @@ int main() {
         numRings = inputBoardSize("Choose the no. of rings(3 - 9) : ", 3, 9);
         numTowers = inputBoardSize("Choose the no. of towers(3 - 9) : ", 3, 9);
 
-        printUltimateBoard(playerNameLength, playerName, numRings, numTowers, move, gameBoard, ring);
         firstMove++;
     }
+
+char gameBoard[numRings][numTowers];
+    //Board Initialization
+        for (int i = 0; i < numRings; i++) {
+            for (int j = 0; j < numTowers; j++) {
+                gameBoard[i][j] = '.';
+            }
+        }
+        for (int i = numTowers-1, j = 0; i >= 0 && j < numTowers; i--, j++) {
+            gameBoard[0][i] = j + '1';
+        }
+
+printUltimateBoard(playerNameLength, playerName, numRings, numTowers, move, gameBoard, ring);
+board(numRings,numTowers,gameBoard);
 
     //The Game-Play
     while(!winFlag) {
